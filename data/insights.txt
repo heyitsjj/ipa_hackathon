@@ -1,0 +1,66 @@
+List of Global Investment Committee Investment Themes: 
+
+GIC Theme 1: Take Profits in AAA Tech 
+GIC Rationale 1: From October 2022 through early February 2023, stocks surged in a bear market rally. 
+
+GIC Theme 2: Selectively Pick Stocks in Sectors Aligned With Next Business Cycle Theme 
+GIC Rationale 2: The COVID-19 pandemic was an exogenous shock to the economy, which transformed the nature of work and the structural dynamics of the labor force. 
+
+GIC Theme 3: Rebalance Exposure to International Stocks; Especially Emerging Markets
+GIC Rationale 3: Full and complete economic reopening from COVID-19 and central banks' stance toward rolling back monetary accomodation are now out of sync. 
+
+--------------------------------------------------------------------------------------------------------
+Changes to Ideas for Investment Themes: 
+
+GIC Theme 2: Selectively Pick Stocks in Sectors Aligned With Next Business Cycle Theme
+Additions: 
+    Product - NA 
+    Rationale - NA 
+Removals: 
+    Product - BBB: Fruit and Vegetable Innovation Leaders 
+    Rationale - This strategy has been discontinued 
+
+--------------------------------------------------------------------------------------------------------
+Changes to Ideas for Asset Classes: 
+
+Asset Class: US Large Cap Growth 
+Additions: 
+    Product - NA 
+    Rationale - NA 
+Removals: 
+    Product - BBB: Fruit and Vegetable Innovation Leaders 
+    Rationale - The sponsor has discontinued this strategy 
+
+Asset Class: US Large Cap Value 
+Addtions: 
+    Product - Equities: Toothbrush Co. (TC)
+    Rationale - We have an overweight rating on TC as we expect mid-single digit organic sales growth. 
+Removals: 
+    Product - NA 
+    Rationale - NA 
+
+--------------------------------------------------------------------------------------------------------
+Research Recommendations: 
+
+Theme 1: Take Profits in AAA Tech 
+Rationale 1: From October 2022 through early February 2023, stocks surged in a bear market rally. 
+    Investment Idea: Impax Global Environmental Markets Fund
+    Ticker: PGINX
+    Platform: XXX 
+    Description: The investment process takes advantage of active ABC strategies. 
+    Investment Idea: Infrastructure Index Fund
+    Ticker: B-TEST
+    Platform: YYY
+    Description: S&P 500
+
+Theme 2: Selectively Pick Stocks in Sectors Aligned With Next Business Cycle Theme 
+Rationale: 2: The COVID-19 pandemic was an exogenous shock to the economy, which transformed the nature of work and the structural dynamics of the labor force. 
+    Investment Idea: Aristotle Value Equity Fund
+    Ticker: TEST-A
+    Platform: XXX
+    Description: CCC Equity looks for higher quality companies selling at attractive prices. 
+    Investment Idea: Calvert Emerging Markets Equity Fund
+    Ticker: CVMIX
+    Platform: YYY 
+    Description: This fund leverages bottom-up fundamental research with a top-down macro overlay. 
+
