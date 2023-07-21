@@ -6,6 +6,8 @@ from llama_index import load_index_from_storage, SimpleDirectoryReader, VectorSt
 from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.query_engine import SubQuestionQueryEngine
 from flask import Flask
+from services.smartquery import generateSmartQuery
+from services.agents import multiCsvAgent
 
 
 chatbot_api = Blueprint('chatbot', __name__)
@@ -62,29 +64,61 @@ def llama_hack_query():
                         2) Holding: it means the client name, quantity, market value, fund name, and ticker of the fund that the financial advisor is in charge of. 
                     """
 
-    query_str = """Give me only the research recomendations that are related to my book of business / the funds 
-                    that the Financial Advisor is in charge for. In addition, also show me the holding information 
-                    of the funds that are affected by the research recommendations. 
-                    """
+    # question = """Give me only the research recomendations that are related to my book of business / the funds 
+    #                 that the Financial Advisor is in charge for. In addition, also show me the holding information 
+    #                 of the funds that are affected by the research recommendations. 
+    #                 """
+    
+    table_json_format = """JSON. The JSON should follow the following structure and give the following data:
+                        "data":[
+                                {
+                                    "FA_Name":"",
+                                    "Client_Name":"",
+                                    "Client_Account_Number":"",
+                                    "Fund_Name":"",
+                                    "Quantity":""
+                                },
+                            ]
+                        
+                        If the instruction is not clear, please see the following JSON delimited by === for an example output: 
+                        ===
+                        "data":[
+                                {
+                                    "FA_Name":"SMALL BARRY R."
+                                    "Client_Name":"SKATTUM PATRICIA",
+                                    "Client_Account_Number":"2015-09-23-15.36.26.059851",
+                                    "Fund_Name":"Impax Global Environmental Markets Fund",
+                                    "Quantity":"119.00"
+                                },
+                            ]
+                        ===
+                        Use the CLIENT_NME column for Client_Name. Use the ACCOUNT column for Client_Account_number. Use FUND_NAME column for Fund_Name. Use AMT_QTY column for Quantity. 
+                        Do not combine clients even if they have the same fund. 
+                        """
+    
+    question = f"""Give me the current holding information of the each fund that are affected the research recommendations in the format of {table_json_format}"""
+    
+    # question = "Give me only the Investment Ideas that are related to the funds / book of business that the financial advisor SMALL BARRY R. is in charge of."
 
-    general_prompt_tmpl = (
-        """We have provided context information about this document below \n
-        -----------------------\n
-        {context_str}
-        -----------------------\n
-        Do not use your own knowledge. Use only the above context and the documents provided, """
-        f"please answer {query_str}"
-    )
+    # question = "What are the research Recommendations? "
 
-    general_prompt = QuestionAnswerPrompt(general_prompt_tmpl)
+    # if "holding" in question: 
+    #     question= f"{question}\n{table_json_format}"
+    # else: 
+    #     question = f"{question}text."
+    
+
+    query_str = f""" Use the following excerpt delimited by +++ as a context reference of the documents used: 
+                    +++
+                    {context_str}
+                    +++
+                    Answer the following question: 
+                    {question}
+                """
 
     # build query engine 
-    insightEngine = insightIndex.as_query_engine(
-        text_qa_template=general_prompt
-    )
-    reportEngine = reportIndex.as_query_engine(
-        text_qa_template=general_prompt
-    )
+    insightEngine = insightIndex.as_query_engine()
+    reportEngine = reportIndex.as_query_engine()
 
     # query tool for querying multiple docs 
     query_engine_tools = [
@@ -104,4 +138,27 @@ def llama_hack_query():
 
     responseStr = str(response)
     return jsonify({"content": responseStr})
+
+#not working yet 
+@chatbot_api.route('/testLangchain')
+def test_langchain(): 
+    question = "What are the research recommendations?"
+
+    answer = str(generateSmartQuery(question))
+
+    return jsonify({'langchain-content': answer})
+
+
+@chatbot_api.route('/testMorningstarRating')
+def test_agent():
+    csv_file_1 = "data/hackathon.csv"
+    csv_file_2 = "data/morningstar.csv"
+    question = "List out the funds that are affected by the morningstar rating performance."
+    # question = "List out the funds that are affected by the morningstar rating performance on 6/30/2023. "
+
+    agent = multiCsvAgent(csv_file_1, csv_file_2)
+
+    dict = agent.run(question)
+
+    return dict
 
