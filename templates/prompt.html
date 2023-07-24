@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post">
+        <label for="title">IPA Test Prompt</label>
+        <br>
+        <br>
+        <label for="title">Your role</label>
+        <input type="text" name="role"
+               placeholder="Desired Role"
+               value="{{ request.form['role'] }}"></input>
+        <br>
+        <br>
+        <br>
+        <label for="content">Please enter your LLM query</label>
+        <br>
+        <textarea name="query"
+                  placeholder="Query"
+                  rows="15"
+                  cols="60"
+                  >{{ request.form['query'] }}</textarea>
+        <br>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+        <br>
+        <br>
+    <h1>{% block title %} LLM Promot Result {% endblock %}</h1>
+        <div class='message'>
+            <h3>{{ result }}</h3>
+        </div>
+        <br>
+        <br>
+        <br>
+    </form>
+{% endblock %}
