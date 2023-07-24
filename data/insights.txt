@@ -44,8 +44,8 @@ Research Recommendations:
 
 Theme 1: Take Profits in AAA Tech 
 Rationale 1: From October 2022 through early February 2023, stocks surged in a bear market rally. 
-    Investment Idea: Impax Global Environmental Markets Fund
-    Ticker: PGINX
+    Investment DWS RREEF Real Assets Fund
+    Ticker: AAAZX
     Platform: XXX 
     Description: The investment process takes advantage of active ABC strategies. 
     Investment Idea: Infrastructure Index Fund
@@ -59,8 +59,8 @@ Rationale: 2: The COVID-19 pandemic was an exogenous shock to the economy, which
     Ticker: TEST-A
     Platform: XXX
     Description: CCC Equity looks for higher quality companies selling at attractive prices. 
-    Investment Idea: Calvert Emerging Markets Equity Fund
-    Ticker: CVMIX
+    Investment Idea: AIA GROUP LTD SPON ADR
+    Ticker: AAGIY
     Platform: YYY 
     Description: This fund leverages bottom-up fundamental research with a top-down macro overlay. 
 

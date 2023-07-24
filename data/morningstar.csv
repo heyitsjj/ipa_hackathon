@@ -1,6 +1,11 @@
-Date,Ticker,FundName,MorningStartRating,RatingsChange
+Date,Ticker,FundName,MorningStarRating,RatingsChange
 7/24/2023,ARSQX,Vaughan Nelson Small Cap Value,1,Same
 7/24/2023,PGINX,Impax Global Environmental Markets Fund,2,Downgrade
 7/24/2023,CVMIX,Calvert Emerging Markets Equity Fund,3,Same
 7/24/2023,ABCDE,Principal Real Estate Securities Fund,4,Upgrade
+7/24/2023,AAAZX,DWS RREEF Real Assets Fund,5,Same
+7/24/2023,AAGIY,AIA GROUP LTD SPON ADR,2,Downgrade
+7/24/2023,A,AGILENT TECHNOLOGIES,3,Same
+6/20/2023,AAGIY,AIA GROUP LTD SPON ADR,5,Same
+
 
