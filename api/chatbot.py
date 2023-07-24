@@ -8,6 +8,11 @@ from llama_index.query_engine import SubQuestionQueryEngine
 from flask import Flask
 from services.smartquery import generateSmartQuery
 from services.agents import multiCsvAgent
+import pandas as pd
+from langchain.llms import OpenAI
+from langchain.agents import create_pandas_dataframe_agent
+from langchain import PromptTemplate, LLMChain
+import os
 
 
 chatbot_api = Blueprint('chatbot', __name__)
@@ -26,6 +31,34 @@ def llama_csv_query():
     
     responseStr = str(response)
     return jsonify({"content": responseStr})
+
+@chatbot_api.route('/langchainQuery/FA_Summary')
+def langchain_csv_summary(): 
+    # Get the absolute path to the instance folder
+    project_dir = os.path.dirname(os.path.abspath(__file__))
+    # Specify the path to your CSV file. 
+    data_file = os.path.join(project_dir, '../data/hackathon.csv')
+    # read csv
+    df = pd.read_csv(data_file)
+
+    # instantiate model, agent, and query 
+    model = OpenAI(model_name="text-davinci-003", temperature=0.0)
+    agent = create_pandas_dataframe_agent(model, df, agent="chat-zero-shot-react-description", verbose=True)
+    # execute response 1
+    responseStr1 = agent.run("What is the total dollar value of holdings for each individual client? Use tool python_repl_ast")
+    # execute response 2
+    responseStr2 = agent.run("What is the total Quantity and Value for each Fund? Use tool python_repl_ast")
+    # execute response 3
+    responseStr3 = agent.run("Please list the clients invested in each individual mutual fund. Use tool python_repl_ast")
+    # use llm to summarize information into a paragraph
+    templateResponse = responseStr1 + " " + responseStr2 + " " + responseStr3
+    template = """Rewrite all of the following information into a traditional paragraph format. 
+                Additionally, reorder names to follow the format firstname, lastname instead of lastname, firstname: 
+                {templateResponse}""" 
+    prompt = PromptTemplate(template=template, input_variables=["templateResponse"])
+    llmRunner = LLMChain(prompt=prompt, llm=model)
+    finalResponse = llmRunner.run(templateResponse)
+    return jsonify({"content": finalResponse})
 
 @chatbot_api.route('/llamaQuery/insight_and_report')
 def llama_hack_query(): 
