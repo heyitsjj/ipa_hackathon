@@ -1,0 +1,96 @@
+==========================================================================
+Endpoint for the UI Top Summary Tab: http://127.0.0.1:5000/general/FA_Summary
+
+Request: 
+    Method: GET 
+
+Response: 
+    {
+        "content": "This contains content used for the Summary tab on the UI. It contains text summary of the Financial Advisor's book of business"
+    }
+
+==========================================================================
+Endpoint for Chat: http://127.0.0.1:5000/chatbot/chat
+Request Method: POST 
+
+Sample Request & Response by use cases: 
+
+    -------------------------------------------
+    1) On 07/24/2023, what funds in my book of business has a Morningstar rating of 5 star?
+    Request Json: 
+        {
+            "userQuestion": "On 07/24/2023, what funds in my book of business has a Morningstar rating of 5 star?"
+        }
+
+    Response Json: 
+        {
+            "response":{
+                "type":"table",
+                "data":[
+                    {
+                        "FundName":DWS RREEF Real Assets Fund,
+                        "Ticker":AAAZX
+                    }
+                ]
+                
+            }
+        }
+
+    -------------------------------------------
+    2) Give me the holding information of all the orphan positions. 
+    Request Json: 
+        {
+            "userQuestion": "Give me the holding information of all the orphan positions. "
+        }
+
+    Response Json: 
+        {
+            "response":{
+                "type":"table",
+                "data":[
+                    {
+                        "AccountNumber":2551,
+                        "ClientName":"AT112 Client Name H",
+                        "FundName":"DWS RREEF Real Assets Fund",
+                        "Ticker":"AAAZX",
+                        "Quantity":23,
+                        "MarketValue":4382.42
+                    },
+                    {
+                        "AccountNumber":8848,
+                        "ClientName":"AT112 Client Name J",
+                        "FundName":"DWS RREEF Real Assets Fund",
+                        "Ticker":"AAAZX",
+                        "Quantity":21,
+                        "MarketValue":4001.34
+                    }
+                ]
+            }
+        }
+
+    -------------------------------------------
+    3) Give me all of the research recommendations. 
+    Request Json: 
+    {
+        "userQuestion": "Give me all of the research recommendations. "
+    }
+
+    Response Json: 
+    {
+        "response":{
+            "type":"text",
+            "data":{
+                "textResponse":"Research recommendations are the suggested actions that Financial Advisors should take based on the analysis of the
+                                financial/business opportunities and risks, such as adding or removing products from asset classes (e.g. AAAZX and
+                                B-TEST), or changing the investment themes (e.g. taking profits in AAA Tech, or selectively picking stocks in sectors
+                                aligned with the next business cycle theme, such as the Aristotle Value Equity Fund (TEST-A) or AIA GROUP LTD SPON ADR
+                                (AAGIY))"
+            }
+        }
+    }
+
+    -------------------------------------------
+    Note: this document does not include all use cases yet. However, it contains all of the request and response json format. 
+
+    
+

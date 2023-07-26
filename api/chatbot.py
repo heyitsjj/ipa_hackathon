@@ -1,11 +1,10 @@
 from flask import Blueprint, request
-from codeDump_doNotUse.openai import callChatCompletionAPI
+from services.openai import callChatCompletionAPI
 from flask import jsonify
 from llama_index import load_index_from_storage, SimpleDirectoryReader, VectorStoreIndex, QuestionAnswerPrompt
 from langchain.agents import load_tools, initialize_agent, Tool
 from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.query_engine import SubQuestionQueryEngine
-from flask import Flask, request
 from services.agents import *
 import constants
 from tools.qaAgentTools import *
@@ -16,7 +15,7 @@ chatbot_api = Blueprint('chatbot', __name__)
 @chatbot_api.route('/chat', methods = ['POST'])
 def chatFinal():
     # define llm 
-    llm = ChatOpenAI(model=constants.GPT_MODEL,temperature=0)
+    llm = OpenAI(model=constants.COMPLETION_MODEL,temperature=0)
 
     # get user question
     requestJson = request.get_json()
@@ -38,18 +37,17 @@ def chatFinal():
 
     result = chat_chain.run(question)
 
-    response = formatResponse(result)
-
-    return response
-
-
-
-
-
-
-@chatbot_api.route('/chatHere')
-def chat():
-    """ Test Book + Morningstar agent """
-    result = formatResponse()
+    # response = formatResponse(result)
 
     return result
+
+
+
+
+
+# test / experiment endpoint 
+# @chatbot_api.route('/chatHere')
+# def chat():
+#     result = holding_summary()
+
+#     return result

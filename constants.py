@@ -4,7 +4,7 @@ FA_Name = "FA-1"
 #GPT Connectivity 
 GPT_MODEL = "gpt-3.5-turbo"
 COMPLETION_MODEL = "text-davinci-003"
-OPENAI_API_KEY = "xxxxx"
+OPENAI_API_KEY = "xxxx"
 
 chatCompletionURL = "https://api.openai.com/v1/chat/completions"
 completionURL = "https://api.openai.com/v1/completions"
@@ -15,7 +15,7 @@ max_execution_time=60
 max_iterations=30
 
 #dataframe chunking size 
-df_chunk_size = 3
+df_chunk_size = 6
 text_chunk_size = 1000
 text_overlap = 100
 
@@ -40,15 +40,15 @@ bookOfBussinessContext = """
                         about the clients and the funds that a specific Financial Advisor is 
                         in charge of. \n
                         It contains 9 columns: \n
-                        1) FAName: this column contains the name of the Financial Advisor \n
-                        2) AccountNumber: this column contains the account number of the client that the Financial Advisor is responsible for \n
-                        3) TradingPlatform: this column contains information about the trading platform of the fund \n
-                        4) 459_ClientName: this column contains the name of the Client that the Financial Advisor is responsible for \n
-                        5) Cusip: this column contains the identification number of the fund that is owned by the client and is managed by the Financial Advisor \n
-                        6) FundName: this column contains the name fo the fund that is owned by the client and is managed by the Financial Advisor\n
-                        7) Ticker: this column contains the ticker information of the fund that is owned by the client and is managed by the Financial Advisor\n
-                        8) Quantity: this column contains the quantity of the specific fund that is owned by the client and is managed by the Financial Advisor \n
-                        9) MarketValue: this column contains the market value of the fund that is owned by the client and is managed by the Financial Advisor 
+                        1) FAName: contains the name of the Financial Advisor \n
+                        2) AccountNumber: contains the account number of the client that the Financial Advisor is responsible for \n
+                        3) TradingPlatform: contains information about the trading platform of the fund \n
+                        4) 459_ClientName: contains the name of the Client that the Financial Advisor is responsible for \n
+                        5) Cusip: contains the identification number of the fund that is owned by the client and is managed by the Financial Advisor \n
+                        6) FundName: contains the name fo the fund that is owned by the client and is managed by the Financial Advisor\n
+                        7) Ticker: contains the ticker information of the fund that is owned by the client and is managed by the Financial Advisor\n
+                        8) Quantity: contains the quantity of the specific fund that is owned by the client and is managed by the Financial Advisor \n
+                        9) MarketValue: contains the market value of the fund that is owned by the client and is managed by the Financial Advisor 
                         """
 
 insightContext = """
@@ -70,18 +70,18 @@ morningstarContext = """
                     See the excerpt delimited by --- for the context of the Morningstar rating data document that is provided to you: \n
                     ---
                     The Morningstar data document contains information of the morningstar rating of each fund on different days. It contains 5 columns: 
-                    1) Date: this column contains the date of when the morningstar rating is given to the fund 
-                    2) Ticker: this column contains the ticker information of the fund 
-                    3) FundName: this column contains the name fo the fund 
-                    4) MorningStarRating: this column contains the actual morningstar rating of the fund on a certain day 
-                    5) RatingsChange: this column contains the rating change of the fund compared to its previous morningstar rating. The value of the column can be same, upgrade, or downgrade. 
+                    1) Date: contains the date of when the morningstar rating is given to the fund 
+                    2) Ticker: contains the ticker information of the fund 
+                    3) FundName: contains the name fo the fund 
+                    4) MorningStarRating: contains the actual morningstar rating of the fund on a certain day 
+                    5) RatingsChange: contains the rating change of the fund compared to its previous morningstar rating. The value of the column can be same, upgrade, or downgrade. 
                     --- 
                     """
 
 terminologyContext = """
                     Terminology - The below phrases are some common terms used by the Financial Advisors:\n
                     1) Book of Business: it means the information of the clients and the funds that a Financial Advisor is responsible for.\n  
-                    2) Holding: it means that the user wants you to provide the values of the following columns that satisfy the conditions of the user's question: AccountNumber, 459_ClientName, Cusip, FundName, Ticker, Quantity, and MarketValue. \n
+                    2) Holding: it means that the user wants you to provide a JSON array that contains the values of the following columns that satisfy the conditions of the user's question: AccountNumber, 459_ClientName, FundName, Ticker, Quantity, and MarketValue. \n
                     3) Top N Holdings: it means that the user wants the top N holdings basing on how large their market values are. \n 
                     4) Orphan Funds / Position: it means any fund under one client that has a quantity value below 30. 
                     """
@@ -97,6 +97,21 @@ tool_bob_ms_description = """Useful when user wants to retrieve the holding info
 
 
 # response json format 
+holdingSummaryJson = """
+                        {
+                            "response":{
+                                "type":"tableSummary",
+                                "data":
+                                    {
+                                        "TotalAssets":"",
+                                        "Advisory":"",
+                                        "NonAdvisory":""
+                                    }
+                                
+                            }
+                        }
+                        """
+
 tableJsonInstruction = """ Please format the answer into the following JSON format: """
 tableResponseFormat = """
                         {

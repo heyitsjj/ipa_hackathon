@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from codeDump_doNotUse.openai import callChatCompletionAPI
+from services.openai import callChatCompletionAPI
 from flask import jsonify
 from codeDump_doNotUse.llama import loadDocuments, createAndStoreIndex, getStorageContext
 from llama_index import load_index_from_storage
